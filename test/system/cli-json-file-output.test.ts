@@ -17,10 +17,12 @@ test('`test --json-file-output can save JSON output to file while sending human 
 
   exec(
     `node ${main} test --json-file-output=snyk-direct-json-test-output.json`,
-    (err, stdout) => {
+    async (err, stdout) => {
       if (err) {
         throw err;
       }
+      // give file a little time to be finished to be written
+      await new Promise((r) => setTimeout(r, 2000));
       t.match(stdout, 'Organization:', 'contains human readable output');
       const outputFileContents = readFileSync(
         'snyk-direct-json-test-output.json',
@@ -39,10 +41,12 @@ test('`test --json-file-output produces same JSON output as normal JSON output t
 
   exec(
     `node ${main} test --json --json-file-output=snyk-direct-json-test-output.json`,
-    (err, stdout) => {
+    async (err, stdout) => {
       if (err) {
         throw err;
       }
+      // give file a little time to be finished to be written
+      await new Promise((r) => setTimeout(r, 2000));
       const stdoutJson = stdout;
       const outputFileContents = readFileSync(
         'snyk-direct-json-test-output.json',
@@ -67,10 +71,12 @@ test('`test --json-file-output can handle a relative path`', (t) => {
 
   exec(
     `node ${main} test --json --json-file-output=${outputPath}`,
-    (err, stdout) => {
+    async (err, stdout) => {
       if (err) {
         throw err;
       }
+      // give file a little time to be finished to be written
+      await new Promise((r) => setTimeout(r, 2000));
       const stdoutJson = stdout;
       const outputFileContents = readFileSync(outputPath, 'utf-8');
       unlinkSync(outputPath);
@@ -99,10 +105,12 @@ test(
 
     exec(
       `node ${main} test --json --json-file-output=${outputPath}`,
-      (err, stdout) => {
+      async (err, stdout) => {
         if (err) {
           throw err;
         }
+        // give file a little time to be finished to be written
+        await new Promise((r) => setTimeout(r, 2000));
         const stdoutJson = stdout;
         const outputFileContents = readFileSync(outputPath, 'utf-8');
         unlinkSync(outputPath);

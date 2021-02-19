@@ -22,7 +22,9 @@
     "node": ">=8"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test:jest": "jest",
+    "format": "prettier --write '{src,test,scripts}/**/*.{js,ts}'"
   },
   "keywords": [
     "security",

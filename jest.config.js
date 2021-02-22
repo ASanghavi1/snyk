@@ -6,8 +6,8 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.ts'],
   coverageReporters: ['text-summary', 'html'],
   testMatch: [
-    '<rootDir>/test/*.spec.ts',
-    '<rootDir>\\test\\*.spec.ts', // for Windows
+    '<rootDir>/test/**/*.spec.ts',
+    '<rootDir>\\test\\**\\*.spec.ts', // for Windows
   ],
   modulePathIgnorePatterns: [
     '<rootDir>/test/.*fixtures',

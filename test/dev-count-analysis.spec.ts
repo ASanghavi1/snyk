@@ -14,7 +14,7 @@ describe('cli dev count via git log analysis', () => {
   // this computes the expectedContributorUserIds and expectedMergeOnlyUserIds
   beforeAll(async () => {
     const timestampEpochSecondsStartOfPeriod = getTimestampStartOfContributingDevTimeframe(
-      new Date(1590174610000),
+      new Date(1590174620000),
       10,
     );
 
@@ -55,7 +55,7 @@ describe('cli dev count via git log analysis', () => {
 
   it('returns contributors', async () => {
     const contributors = await getContributors({
-      endDate: new Date(1590174610000),
+      endDate: new Date(1590174620000),
       periodDays: 10,
       repoPath: process.cwd(),
     });
@@ -63,11 +63,11 @@ describe('cli dev count via git log analysis', () => {
     expect(contributorUserIds.sort()).toEqual(
       expectedContributorUserIds.sort(),
     );
-  });
+  }, 20000);
 
   it('does not include contributors who have only merged pull requests', async () => {
     const contributors = await getContributors({
-      endDate: new Date(1590174610000),
+      endDate: new Date(1590174620000),
       periodDays: 10,
       repoPath: process.cwd(),
     });
@@ -78,5 +78,5 @@ describe('cli dev count via git log analysis', () => {
       (user) => contributorUserIds.includes(user),
     );
     expect(legitUserIdsWhichAreAlsoInMergeOnlyUserIds).toHaveLength(0);
-  });
+  }, 20000);
 });
